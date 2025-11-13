@@ -1,0 +1,5 @@
+{
+  "name": "Sentinel Terminal",
+  "description": "A financial sentiment analysis dashboard featuring Swiss International styling and Brutalist elements. Visualizes stock sentiment using simulated data and TradingView charts.",
+  "requestFramePermissions": []
+}
