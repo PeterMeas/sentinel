@@ -17,7 +17,7 @@
 
 ## 🚀 About
 
-Sentinel Terminal aggregates real-time sentiment data from Reddit, StockTwits, and Twitter/X to provide traders with actionable market intelligence. Built with AI-powered analysis using Google Gemini, it offers live scraping, sentiment scoring, and interactive visualizations.
+Sentinel aggregates real-time sentiment data from Reddit, StockTwits, and Twitter/X. Built with AI-powered analysis using Google Gemini, it offers live scraping, sentiment scoring, and interactive visualizations.
 
 **Created by:** [Peter Meas](https://github.com/peterMeas)
 
