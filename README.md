@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📊 Sentinel Terminal
+# Sentinel 
 
 **Real-Time Stock Sentiment Analysis Platform**
 
