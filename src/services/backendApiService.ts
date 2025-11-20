@@ -6,18 +6,31 @@ export const analyzeSentiment = async (ticker: string): Promise<SentimentAnalysi
   try {
     const response = await fetch(`${API_BASE_URL}/sentiment/${ticker}`);
 
+    // If 404, it means invalid ticker - throw specific error
+    if (response.status === 404) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Invalid ticker symbol');
+    }
+
+    // For other errors, check if backend is down
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new Error(`Backend error: ${response.status}`);
     }
 
     const data = await response.json();
     return data as SentimentAnalysisResult;
 
   } catch (error) {
-    console.error("Backend API Error:", error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
 
-    // Fallback to mock data if backend is unavailable
-    return generateFallbackData(ticker);
+    // If it's an invalid ticker error, re-throw it
+    if (errorMessage.includes('Invalid ticker') || errorMessage.includes('No data found')) {
+      throw error;
+    }
+
+    // For other errors (backend down), log and throw
+    console.error("Backend API Error:", error);
+    throw new Error('Backend server is not responding. Please ensure the backend is running.');
   }
 };
 

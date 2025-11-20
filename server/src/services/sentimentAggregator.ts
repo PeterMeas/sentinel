@@ -22,6 +22,11 @@ export class SentimentAggregator {
 
   async analyzeTicker(ticker: string): Promise<SentimentAnalysisResult> {
     try {
+      // Validate ticker format (basic check)
+      if (!ticker || ticker.length > 5 || !/^[A-Z]+$/i.test(ticker)) {
+        throw new Error(`Invalid ticker symbol: ${ticker}`);
+      }
+
       // Scrape data from all sources in parallel
       const [redditComments, twitterComments, stockTwitsComments] = await Promise.all([
         this.redditScraper.scrapeStockMentions(ticker, 20),
@@ -35,6 +40,11 @@ export class SentimentAggregator {
         ...twitterComments,
         ...stockTwitsComments
       ];
+
+      // Check if we found any data - if not, ticker might be invalid
+      if (allComments.length === 0) {
+        throw new Error(`No data found for ticker ${ticker}. This ticker may not exist or has no social media mentions.`);
+      }
 
       // Sort by impact score and timestamp
       const sortedComments = allComments

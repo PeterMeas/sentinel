@@ -62,9 +62,21 @@ app.get('/api/sentiment/:ticker', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('Error in sentiment endpoint:', error);
+
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+    // Check if it's a validation error (invalid ticker)
+    if (errorMessage.includes('Invalid ticker') || errorMessage.includes('No data found')) {
+      return res.status(404).json({
+        error: 'Invalid ticker',
+        message: errorMessage
+      });
+    }
+
+    // Otherwise it's a server error
     res.status(500).json({
       error: 'Failed to analyze sentiment',
-      message: error instanceof Error ? error.message : 'Unknown error'
+      message: errorMessage
     });
   }
 });

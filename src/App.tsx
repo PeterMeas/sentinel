@@ -15,6 +15,7 @@ const App = () => {
   const [ticker, setTicker] = useState<string>('NVDA');
   const [searchInput, setSearchInput] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Generate default data dynamically
   const defaultData: SentimentAnalysisResult = useMemo(() => {
@@ -88,15 +89,19 @@ const App = () => {
   const handleSearch = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchInput) return;
-    
+
     const targetTicker = searchInput.toUpperCase();
     setLoading(true);
     setTicker(targetTicker);
-    
+    setError(null);
+
     try {
       const result = await analyzeSentiment(targetTicker);
       setData(result);
+      setError(null);
     } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      setError(errorMessage);
       console.error(err);
     } finally {
       setLoading(false);
@@ -154,7 +159,27 @@ const App = () => {
            </div>
         </section>
 
+        {/* ERROR MESSAGE */}
+        {error && (
+          <section className="bg-red-50 border-2 border-red-500 shadow-lg">
+            <div className="p-6 flex items-start gap-4">
+              <div className="flex-shrink-0 w-10 h-10 bg-red-500 text-white flex items-center justify-center font-mono font-bold text-xl">
+                !
+              </div>
+              <div className="flex-1">
+                <h3 className="font-mono font-bold text-sm uppercase tracking-wider text-red-900 mb-2">Error</h3>
+                <p className="font-mono text-sm text-red-800">{error}</p>
+                <p className="font-mono text-xs text-red-600 mt-2">
+                  Please check that the ticker symbol is valid and try again.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* SENTIMENT OVERVIEW - Main metrics at a glance */}
+        {!error && (
+        <>
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Sentiment Gauge */}
           <div className="h-[300px]">
@@ -207,6 +232,8 @@ const App = () => {
             <CommentFeed comments={data.comments} />
           </div>
         </section>
+        </>
+        )}
 
       </div>
     </Layout>
