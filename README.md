@@ -14,7 +14,8 @@
 </div>
 
 ---
-![Untitled design](https://github.com/user-attachments/assets/0a1322ef-d91c-4208-84b9-8b25d83e3d5b)
+![Untitled design](https://github.com/user-attachments/assets/49d814e0-4fd1-4ef9-a1a5-cebdfe80689e)
+
 
 ## 🚀 About
 
