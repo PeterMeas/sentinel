@@ -10,8 +10,10 @@ export class TwitterScraper {
     // 2. Get API keys
     // 3. Use the official Twitter API client
 
-    // This is a mock implementation that simulates realistic Twitter data
-    return this.generateMockTwitterData(ticker, limit);
+    // Return empty array until real Twitter API is configured
+    // This prevents fake data from polluting the sentiment analysis
+    console.log(`Twitter scraper: Skipping $${ticker} (no API credentials configured)`);
+    return [];
   }
 
   private generateMockTwitterData(ticker: string, limit: number): SocialComment[] {
