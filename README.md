@@ -17,13 +17,11 @@
 ![Untitled design](https://github.com/user-attachments/assets/49d814e0-4fd1-4ef9-a1a5-cebdfe80689e)
 
 
-## 🚀 About
+##  About
 
 Sentinel aggregates real-time sentiment data from Reddit, StockTwits, and Twitter/X. Built with AI-powered analysis using Google Gemini, it offers live scraping, sentiment scoring, and interactive visualizations.
 
 **Created by:** [Peter Meas](https://github.com/peterMeas)
-
-> **Note:** This project was developed with the assistance of AI tools (Claude Code) to accelerate development and implement best practices in TypeScript, React, and Node.js architecture.
 
 ## Run Locally
 
@@ -51,7 +49,7 @@ Sentinel aggregates real-time sentiment data from Reddit, StockTwits, and Twitte
    npm run build
    ```
 
-## ✅ Verifying Backend is Running
+##  Verifying Backend is Running
 
 ### Quick Test (Browser)
 Open http://localhost:3001/api/health in your browser. You should see:
@@ -78,7 +76,7 @@ When you start the backend (`npm run server:dev`), you should see:
 ╚════════════════════════════════════════════════════════╝
 ```
 
-**📖 For detailed troubleshooting, see [CHECK-BACKEND.md](CHECK-BACKEND.md)**
+** For detailed troubleshooting, see [CHECK-BACKEND.md](CHECK-BACKEND.md)**
 
 ## Project Structure
 
